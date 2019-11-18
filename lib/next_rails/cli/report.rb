@@ -74,15 +74,14 @@ module NextRails
         #{"#{out_of_date_gems.length}".red} of the #{gems.count} gems are out-of-date (#{percentage_out_of_date}%)
         MESSAGE
       end
+
+      private
+
+      def gem_header(_gem)
+        header = "#{_gem.name} #{_gem.version}".bold
+        header << " (loaded from git)".magenta if _gem.sourced_from_git?
+        header
+      end
     end
-
-    private
-
-    def gem_header(_gem)
-      header = "#{_gem.name} #{_gem.version}".bold
-      header << " (loaded from git)".magenta if _gem.sourced_from_git?
-      header
-    end
-
   end
 end
