@@ -1,3 +1,5 @@
+require "bundler"
+
 begin
   require "action_view"
 rescue LoadError
