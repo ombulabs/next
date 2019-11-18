@@ -2,10 +2,6 @@ require "bundler"
 
 module NextRails
   class GemInfo
-    if defined?(ActionView)
-      include ActionView::Helpers::DateHelper
-    end
-
     class NullGemInfo < GemInfo
       def initialize; end
 
@@ -77,13 +73,13 @@ module NextRails
 
     def latest_version
       @latest_version ||= begin
-        latest_gem_specification = Gem.latest_spec_for(name)
-        if latest_gem_specification
-          GemInfo.new(latest_gem_specification)
-        else
-          NullGemInfo.new
-        end
-      end
+                            latest_gem_specification = Gem.latest_spec_for(name)
+                            if latest_gem_specification
+                              GemInfo.new(latest_gem_specification)
+                            else
+                              NullGemInfo.new
+                            end
+                          end
     end
 
     def compatible_with_rails?(rails_version: Gem::Version.new("5.0"))
