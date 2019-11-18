@@ -4,12 +4,21 @@ module NextRails
   class CLI < Thor
     require_relative "cli/report"
 
-    desc "report", "Report of your current \"bundle\""
-    option :compatibility, aliases: "-c", type: :boolean
-    option :outdated, aliases: "-o", type: :boolean
-    def report
-      NextRails::CLI::Report.compatibility if options[:compatibility]
-      NextRails::CLI::Report.outdated if options[:outdated]
+    desc "outdated", "Check which gems are outdated in your \"bundle\""
+    def outdated
+      NextRails::CLI::Report.outdated
     end
+
+    desc "compatibility", "Check if your current \"bundle\" is compatible with a specific version of Ruby on Rails"
+    option "rails-version", type: :string
+    def compatibility
+      unless options["rails-version"]
+        puts "Specify a rails version with \"--rails-version\""
+        exit(1)
+      end
+
+      NextRails::CLI::Report.compatibility(rails_version: options[:rails_version], include_rails_gems: false)
+    end
+
   end
 end
