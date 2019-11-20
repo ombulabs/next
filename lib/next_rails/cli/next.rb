@@ -8,6 +8,10 @@ module NextRails
         add_dual_boot
       end
 
+      def exec(cmd:)
+        system "BUNDLE_GEMFILE=#{GEMFILE_NEXT} bundle exec #{cmd}"
+      end
+
       private
 
       def add_dual_boot
@@ -21,7 +25,7 @@ module NextRails
         new_gemfile = "#{GEMFILE}.new"
 
         File.open(new_gemfile, "w+") do |f|
-          f.puts next_method_str unless next_method_defined?
+          f.puts(next_method_str) unless next_method_defined?
 
           File.foreach(GEMFILE) do |line|
             if matches = line.match(/\Agem ("|')rails("|').*\Z/)

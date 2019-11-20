@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative "../lib/next_rails/cli"
-NextRails::CLI.start(ARGV)
+
+if ARGV.empty? || NextRails::CLI.all_tasks.has_key?(ARGV[0])
+  NextRails::CLI.start(ARGV)
+else
+  NextRails::CLI.new.exec(*ARGV)
+end

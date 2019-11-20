@@ -5,6 +5,11 @@ module NextRails
     require_relative "cli/next"
     require_relative "cli/report"
 
+    desc "exec", "Execute user provided commands in the \"bundle\" context", hide: true
+    def exec(cmd)
+      NextRails::CLI::Next.exec(cmd: cmd)
+    end
+
     desc "init", "Configure dual booting"
     option "rails-version", type: :string
     def init
@@ -26,6 +31,5 @@ module NextRails
 
       NextRails::CLI::Report.compatibility(rails_version: options[:rails_version], include_rails_gems: false)
     end
-
   end
 end
