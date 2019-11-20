@@ -2,7 +2,14 @@ require "thor"
 
 module NextRails
   class CLI < Thor
+    require_relative "cli/next"
     require_relative "cli/report"
+
+    desc "init", "Configure dual booting"
+    option "rails-version", type: :string
+    def init
+      NextRails::CLI::Next.init(rails_version: options["rails-version"])
+    end
 
     desc "outdated", "Check which gems are outdated in your \"bundle\""
     def outdated
