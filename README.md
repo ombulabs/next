@@ -6,7 +6,7 @@
 
 The first thing you want to do is setup `dual bootin`. This will allow you to `boot` your application with two versions of Rails, the current one and the one you are trying to upgrade to.
 
-### Init
+## Init
 
 ```shell
 $ next init --rails-version 6.0.0
@@ -19,8 +19,10 @@ This command will do a a few things:
 
 Now to execute commands in the context of your new Rails version all you have to do is prepend the `next` tool to any of your normal commands.
 
-Example:
+**Example:**
+
  `next install` this will try to `bundle istall` with your new Rails version
+
  `next rspec spec/...` check if your tests pass with your new Rails version.
 
  ```shell
